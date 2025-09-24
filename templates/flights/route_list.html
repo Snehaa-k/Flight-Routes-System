@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Routes</title>
+</head>
+<body>
+    <h2>All Routes</h2>
+    <ul>
+        {% for route in routes %}
+            <li>{{ route.source.code }} → {{ route.destination.code }} ({{ route.get_position_display }}, {{ route.duration }} km)</li>
+        {% empty %}
+            <li>No routes available.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'add_route' %}">Add New Route</a></p>
+</body>
+</html>

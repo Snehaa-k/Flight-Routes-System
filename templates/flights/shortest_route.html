@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head><title>Shortest Route</title></head>
+<body>
+    <h2>Find Shortest Route</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label>Source:</label>
+            <select name="source" required>
+                <option value="">Select Airport</option>
+                {% for airport in airports %}
+                    <option value="{{ airport.code }}">{{ airport.code }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label>Destination:</label>
+            <select name="destination" required>
+                <option value="">Select Airport</option>
+                {% for airport in airports %}
+                    <option value="{{ airport.code }}">{{ airport.code }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <button type="submit">Find Shortest Path</button>
+    </form>
+    
+    {% if error %}
+        <div style="color: red;">
+            <h3>Error: {{ error }}</h3>
+        </div>
+    {% elif result %}
+        {% if result.path %}
+            <div style="color: green;">
+                <h3>Shortest Path: {{ result.path }}</h3>
+                <p>Total Distance: {{ result.distance }} km</p>
+            </div>
+        {% else %}
+            <div style="color: red;">
+                <h3>Error: {{ result.message }}</h3>
+            </div>
+        {% endif %}
+    {% endif %}
+    
+    <p><a href="{% url 'route_list' %}">Back to Routes</a></p>
+</body>
+</html>

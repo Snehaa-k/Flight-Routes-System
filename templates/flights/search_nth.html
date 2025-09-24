@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Search Nth Node</title></head>
+<body>
+    <h2>Find Nth Left/Right Node</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+    {% if result %}
+        <h3>Result: {{ result }}</h3>
+    {% endif %}
+    <p><a href="{% url 'route_list' %}">Back to Routes</a></p>
+</body>
+</html>

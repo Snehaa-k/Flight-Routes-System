@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Longest Route</title></head>
+<body>
+    <h2>Longest Route</h2>
+    {% if longest %}
+        <p><strong>Route:</strong> {{ longest.source.code }} → {{ longest.destination.code }}</p>
+        <p><strong>Position:</strong> {{ longest.get_position_display }}</p>
+        <p><strong>Duration:</strong> {{ longest.duration }} km</p>
+    {% else %}
+        <p>No routes found</p>
+    {% endif %}
+    <p><a href="{% url 'route_list' %}">Back to Routes</a></p>
+</body>
+</html>
