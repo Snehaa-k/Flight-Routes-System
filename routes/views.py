@@ -1,5 +1,3 @@
-# flight_system/views.py
-
 from django.shortcuts import render, redirect
 from .models import Route as AirportRoute, Airport
 from .forms import RouteForm

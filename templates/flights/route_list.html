@@ -1,17 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Routes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .routes-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .route-item {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        .route-item:hover {
+            background-color: #e9ecef;
+        }
+        .route-path {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 16px;
+        }
+        .route-details {
+            color: #666;
+            margin-left: 10px;
+        }
+        .no-routes {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        .nav-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .nav-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+        .nav-link.secondary {
+            background-color: #6c757d;
+        }
+        .nav-link.secondary:hover {
+            background-color: #545b62;
+        }
+    </style>
 </head>
 <body>
-    <h2>All Routes</h2>
-    <ul>
-        {% for route in routes %}
-            <li>{{ route.source.code }} → {{ route.destination.code }} ({{ route.get_position_display }}, {{ route.duration }} km)</li>
-        {% empty %}
-            <li>No routes available.</li>
-        {% endfor %}
-    </ul>
-    <p><a href="{% url 'add_route' %}">Add New Route</a></p>
+    <div class="container">
+        <h2>All Routes</h2>
+        
+        <ul class="routes-list">
+            {% for route in routes %}
+                <li class="route-item">
+                    <span class="route-path">{{ route.source.code }} → {{ route.destination.code }}</span>
+                    <span class="route-details">({{ route.get_position_display }}, {{ route.duration }} km)</span>
+                </li>
+            {% empty %}
+                <div class="no-routes">
+                    <p>No routes available.</p>
+                </div>
+            {% endfor %}
+        </ul>
+        
+        <div class="nav-links">
+            <a href="{% url 'add_route' %}" class="nav-link">Add New Route</a>
+            <a href="{% url 'search_nth_node' %}" class="nav-link secondary">Search Nth Node</a>
+            <a href="{% url 'longest_route' %}" class="nav-link secondary">Longest Route</a>
+            <a href="{% url 'shortest_route' %}" class="nav-link secondary">Shortest Path</a>
+        </div>
+    </div>
 </body>
 </html>
